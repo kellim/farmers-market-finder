@@ -1,9 +1,79 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
-
+  font: .9em Verdana, Helvetica, Arial, sans-serif;
 }
+
+.btn {
+  margin: .75em;
+}
+
+/* Map */
 #map {
   height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  position: absolute;
+  background: url(../img/bg.png);
+  left: 1em;
+  top: 1em;
+  z-index: 5;
+  width: 270px;
+  height: 95%;
+}
+
+.app-title {
+  width: 100%;
+  text-align: center;
+  font: 1.9em 'Patrick Hand', cursive;
+  color: #060;
+  padding: 0;
+  margin: 0;
+}
+
+.btn-min {
+  text-align: right;
+  padding: 5px 7px;
+  color: #666;
+  font-size: 1.2em;
+}
+
+.zip {
+  padding: .25em 1em 0;
+}
+
+.attribution {
+  font-size: .8em;
+  padding: .25em 1em 0;
+}
+
+.results {
+  padding: .25em 1em 0;
+}
+.results-title {
+  font: 1.8em 'Patrick Hand', cursive;
+  color: #060;
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar, .attribution {
+      width: 150px;
+    }
+
+    li {
+      padding: .4em 0;
+    }
+
+.minus-btn {
+  padding: 7px 11px;
+  font-size: 1.2em;
+}
+
+    .zip {
+      font-size: .8em;
+    }
 }
