@@ -23,12 +23,13 @@
         <div class="zip">
         Enter your US zip code to find Farmer's Markets near you.
         <input data-bind="textInput: zip" type="text" placeholder="Enter Zip Code" size=10 class="search-query">
-        <button data-bind="click: getMarketData" type="button" class="btn">Search</button>
+        <button data-bind="click: loadMarkets" type="button" class="btn">Search</button>
       </div>
         <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed or certified by USDA.</div>
         <div class="results">
           <h2 class="results-title">Results</h2>
-          <ul class="list-unstyled">
+          <ul class="list-unstyled" data-bind="foreach: marketList">
+            <li data-bind="text: $data.marketName"</li>
           </ul>
         </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
