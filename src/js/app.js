@@ -10,15 +10,23 @@ var Market = function(data) {
 var AppViewModel = function() {
   var self = this;
   self.zip = ko.observable('');
-  self.marketList = ko.observableArray();
+  self.marketList = ko.observableArray([]);
+  // self.currentMarket = ko.observableArray([]);
   self.loadMarketsError = ko.observable('');
   self.loadMarketDetailsError = ko.observable('');
+  self.currentMarket = ko.observableArray([]);
 
   // Called when AJAX function in loadMarketDetails() is successful
-  // to add a marketItem with data from the API to marketList()
+  // to add a new Market object with data from the API to marketList[].
   self.createMarketItem = function(marketItem) {
     self.marketList.push(new Market(marketItem));
-    console.log(self.marketList());
+  }
+
+  // Sets currentMarket to the market in results that the visitor
+  // clicked on.
+  self.setCurrentMarket = function(market) {
+    self.currentMarket(market);
+    console.log(self.currentMarket().marketName(), self.currentMarket().address());
   }
 
   // Gets market name and ID data from Farmer's Market API
@@ -35,7 +43,6 @@ var AppViewModel = function() {
       var id, marketName;
       $.each(data.results, function(i, marketData) {
         marketName = marketData.marketname;
-        console.log(marketData.marketname);
         marketId = marketData.id;
         // Remove number (distance) preceding name in data returned by API
         marketName = marketName.slice(marketName.indexOf(' ') + 1);
@@ -49,8 +56,8 @@ var AppViewModel = function() {
 
   // Called by loadMarkets() to get each market's full details since the initial
   // AJAX call only provides a market's name and ID. This function gets the
-  // address, schedule, products, latitude and longitude and updates
-  // self.marketDetails[].
+  // address, schedule, products, latitude and longitude and calls
+  // createMarketItem() to put a new Market object in an array for each result.
   this.loadMarketDetails = function(marketId, marketName) {
     var loadDetails = $.ajax({
       type: "GET",

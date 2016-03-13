@@ -28,8 +28,8 @@
         <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed or certified by USDA.</div>
         <div class="results">
           <h2 class="results-title">Results</h2>
-          <ul class="list-unstyled" data-bind="foreach: marketList">
-            <li data-bind="text: $data.marketName"</li>
+          <ul class="list-unstyled" data-bind="foreach: marketList()">
+            <li data-bind="text: marketName, click: $parent.setCurrentMarket"</li>
           </ul>
         </div>
     <script src="js/knockout-3.4.0.js"></script>
