@@ -24,7 +24,7 @@ var AppViewModel = function() {
   // Gets market name and ID data from Farmer's Market API
   // and calls loadMarketDetails() to get each market's full details.
   this.loadMarkets = function() {
-    self.loadMarketsError = "";
+    self.marketList.removeAll();
     var loadData = $.ajax({
       type: "GET",
       contentType: "application/json; charset=utf-8",
@@ -70,7 +70,7 @@ var AppViewModel = function() {
       longitude = googleLink.slice(googleLink.indexOf(',') + 2, googleLink.indexOf('(') -1);
       var marketItem = {'marketId' : marketId, 'marketName' : marketName, 'latitude' : latitude, 'longitude' : longitude,
                         'address' : address, 'schedule' : schedule, 'products' : products};
-    self.createMarketItem(marketItem);
+      self.createMarketItem(marketItem);
     });
     loadDetails.fail(function() {
       self.loadMarketDetailsError = "Error Loading Market Details."
