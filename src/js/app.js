@@ -15,8 +15,16 @@ var AppViewModel = function() {
   this.loadMarketDetailsError = ko.observable('');
   this.currentMarket = ko.observableArray([]);
    // numResults set to -1 as it is compared to marketList length to determine
-   // if results should be visible. It gets reset to 0 in loadMarkets.
+   // if results should be visible. It is set to 0 in loadMarkets.
   this.numResults = ko.observable(-1);
+  this.marketQuery = ko.observable('');
+
+  this.filteredMarkets = ko.computed(function() {
+    var search = self.marketQuery().toLowerCase();
+    return ko.utils.arrayFilter(self.marketList(), function (item) {
+      return item.marketName().toLowerCase().indexOf(search) >= 0;
+      });
+  });
 
   // Called by loadMarketDetails to create an array of
   // Market objects.
@@ -36,6 +44,7 @@ var AppViewModel = function() {
   this.changeZip = function() {
     self.marketList.removeAll();
     self.numResults = -1;
+    this.marketQuery('');
   }
 
   // Gets market name and ID data from Farmer's Market API
