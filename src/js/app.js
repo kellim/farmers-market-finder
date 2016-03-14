@@ -14,31 +14,28 @@ var AppViewModel = function() {
   this.loadMarketsError = ko.observable('');
   this.loadMarketDetailsError = ko.observable('');
   this.currentMarket = ko.observableArray([]);
-  // Set to -1 as it is compared to marketList length to determine if
-  // results should be visible. It gets reset to 0 in loadMarkets.
+   // numResults set to -1 as it is compared to marketList length to determine
+   // if results should be visible. It gets reset to 0 in loadMarkets.
   this.numResults = ko.observable(-1);
 
   // Called by loadMarketDetails to create an array of
   // Market objects.
   this.createMarketItem = function(marketItem) {
     self.marketList.push(new Market(marketItem));
-    console.log($(self.marketList()).length,self.numResults > 0, self.numResults, self.resultsVisible);
   }
 
-  // Sets currentMarket to the market in results that the visitor
-  // clicked on.
+  // Visitor clicks on a market in the results, and this sets currentMarket to
+  // the market that was clicked on.
   this.setCurrentMarket = function(market) {
     self.currentMarket(market);
     console.log(self.currentMarket().marketName(), self.currentMarket().address());
   }
 
-  // Visitor clicks Change Zip Code button, and app is reset so they can
+  // Visitor clicks Enter New Zip Code button, and app is reset so they can
   // try a new zip code.
   this.changeZip = function() {
     self.marketList.removeAll();
     self.numResults = -1;
-    console.log(self.marketList());
-    console.log(self.marketList().length);
   }
 
   // Gets market name and ID data from Farmer's Market API

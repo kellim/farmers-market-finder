@@ -24,6 +24,7 @@ body {
   z-index: 5;
   width: 270px;
   height: 95%;
+  overflow: auto;
 }
 
 .app-title {
@@ -48,6 +49,7 @@ body {
 
 .new-zip {
   text-align: center;
+  font-size: .5em;
 }
 
 .attribution {
@@ -64,20 +66,24 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-    .sidebar, .attribution {
-      width: 150px;
-    }
+  .sidebar {
+    width: 170px;
+  }
 
-    li {
-      padding: .4em 0;
-    }
+  li {
+    padding: .4em 0;
+  }
 
-.minus-btn {
-  padding: 7px 11px;
-  font-size: 1.2em;
-}
+  .minus-btn {
+    padding: 7px 11px;
+    font-size: 1.2em;
+  }
 
-    .zip {
-      font-size: .8em;
-    }
+  .zip {
+    font-size: .8em;
+  }
+
+  .results-title {
+    font: 1em;
+  }
 }
