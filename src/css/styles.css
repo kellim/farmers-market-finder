@@ -46,8 +46,12 @@ body {
   padding: .25em 1em 0;
 }
 
+.new-zip {
+  text-align: center;
+}
+
 .attribution {
-  font-size: .8em;
+  font-size: .9em;
   padding: .25em 1em 0;
 }
 
