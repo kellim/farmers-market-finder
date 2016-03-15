@@ -24,6 +24,7 @@ body {
   z-index: 5;
   width: 270px;
   height: 95%;
+  margin-bottom:20px;
   overflow: auto;
 }
 
@@ -63,6 +64,11 @@ body {
 .results-title {
   font: 1.8em 'Patrick Hand', cursive;
   color: #060;
+}
+
+/* Prevent elements hidden by Knockout from flashing on page load */
+.hidden {
+  display: none;
 }
 
 @media screen and (max-width: 480px) {

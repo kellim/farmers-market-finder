@@ -1,14 +1,28 @@
-var Market = function(data) {
+var Market = function(data, marker) {
   this.marketName = ko.observable(data.marketName);
   this.address = ko.observable(data.address);
   this.schedule = ko.observable(data.schedule);
   this.products = ko.observable(data.products);
   this.latitude = ko.observable(data.latitude);
   this.longitude = ko.observable(data.longitude);
+  this.marker = data.marker;
 }
 
 var AppViewModel = function() {
   var self = this;
+
+  // Display Google Map on the page.
+  this.initializeMap = function()  {
+    var mapOptions = {
+      // Center Google Maps on Seattle
+      center:new google.maps.LatLng(47.6063889,-122.3308333),
+      mapTypeControl: false,
+      zoom: 9
+    };
+  self.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  }
+  this.initializeMap();
+
   this.zip = ko.observable('');
   this.marketList = ko.observableArray([]);
   this.loadMarketsError = ko.observable('');
@@ -19,6 +33,7 @@ var AppViewModel = function() {
   this.numResults = ko.observable(-1);
   this.marketQuery = ko.observable('');
 
+  // Markets filtered by entered search filter
   this.filteredMarkets = ko.computed(function() {
     var search = self.marketQuery().toLowerCase();
     return ko.utils.arrayFilter(self.marketList(), function (item) {
@@ -42,9 +57,29 @@ var AppViewModel = function() {
   // Visitor clicks Enter New Zip Code button, and app is reset so they can
   // try a new zip code.
   this.changeZip = function() {
+    self.zip('');
+    self.removeMarkers();
     self.marketList.removeAll();
     self.numResults = -1;
     this.marketQuery('');
+  }
+  // Called by loadMarketDetails to create a marker, then it gets
+  // added to marketList[], the array of Market objects.
+  this.addMarker = function(latitude, longitude) {
+    marker = new google.maps.Marker({
+      map: self.map,
+      animation: google.maps.Animation.DROP,
+      position: {lat: latitude, lng: longitude}
+    });
+    // console.log(marker);
+    return marker;
+  }
+
+  // Called by changeZip when resetting app to remove all the markers.
+  this.removeMarkers = function() {
+    $.each(self.marketList(), function(i, market) {
+      market.marker.setMap(null);
+    });
   }
 
   // Gets market name and ID data from Farmer's Market API
@@ -94,9 +129,13 @@ var AppViewModel = function() {
       products = details.marketdetails.Products;
       // Extract latitude and longitude from Google link returned by API.
       latitude = googleLink.slice(googleLink.indexOf('=') + 1, googleLink.indexOf(','));
+      latitude = parseFloat(latitude);
       longitude = googleLink.slice(googleLink.indexOf(',') + 2, googleLink.indexOf('(') -1);
-      var marketItem = {'marketId' : marketId, 'marketName' : marketName, 'latitude' : latitude, 'longitude' : longitude,
-                        'address' : address, 'schedule' : schedule, 'products' : products};
+      longitude = parseFloat(longitude);
+      var marker = self.addMarker(latitude, longitude);
+      var marketItem = {'marketId' : marketId, 'marketName' : marketName,
+          'latitude' : latitude, 'longitude' :longitude, 'address' : address,
+          'schedule' : schedule, 'products' : products, 'marker' : marker};
       self.createMarketItem(marketItem);
     });
     loadDetails.fail(function() {
@@ -104,4 +143,9 @@ var AppViewModel = function() {
     });
   }
 }
-ko.applyBindings(new AppViewModel());
+
+// Callback function for Google Maps API
+var init = function(){
+  ko.applyBindings(new AppViewModel());
+}
+
