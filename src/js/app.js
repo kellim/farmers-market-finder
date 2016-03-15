@@ -10,19 +10,22 @@ var Market = function(data, marker) {
 
 var AppViewModel = function() {
   var self = this;
+  // Latitude and Longitude for US Center
+  this.US_LAT = 37.8;
+  this.US_LNG = -101.5;
 
   // Display Google Map on the page.
   this.initializeMap = function()  {
     var mapOptions = {
-      // Center Google Maps on Seattle
-      center:new google.maps.LatLng(47.6063889,-122.3308333),
+      center: new google.maps.LatLng(self.US_LAT,self.US_LNG),
       mapTypeControl: false,
-      zoom: 9
+      zoom: 6
     };
   self.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
   this.initializeMap();
 
+  this.bounds = new google.maps.LatLngBounds();
   this.zip = ko.observable('');
   this.marketList = ko.observableArray([]);
   this.loadMarketsError = ko.observable('');
@@ -54,28 +57,53 @@ var AppViewModel = function() {
     console.log(self.currentMarket().marketName(), self.currentMarket().address());
   }
 
+  this.setMapLoc = function(lat, lng, zoomLevel) {
+    self.map.setCenter({ lat,lng });
+    self.map.setZoom(zoomLevel);
+  }
+
+  // Display Info Window with information about the current market.
+  this.displayInfoWindow = function() {
+
+  }
+
+  this.selectMarker = function() {
+
+  }
+
   // Visitor clicks Enter New Zip Code button, and app is reset so they can
   // try a new zip code.
   this.changeZip = function() {
+    console.log(self.bounds);
     self.zip('');
     self.removeMarkers();
+    self.setMapLoc(self.US_LAT, self.US_LNG, 6);
+    self.bounds = new google.maps.LatLngBounds();
     self.marketList.removeAll();
     self.numResults = -1;
     this.marketQuery('');
   }
+
   // Called by loadMarketDetails to create a marker, then it gets
   // added to marketList[], the array of Market objects.
-  this.addMarker = function(latitude, longitude) {
+  this.addMarker = function(lat, lng) {
     marker = new google.maps.Marker({
       map: self.map,
       animation: google.maps.Animation.DROP,
-      position: {lat: latitude, lng: longitude}
+      position: {lat: lat, lng: lng}
     });
-    // console.log(marker);
+    self.bounds.extend(marker.getPosition());
     return marker;
   }
 
-  // Called by changeZip when resetting app to remove all the markers.
+  // Called by loadMarketDetails after all markers have been placed. It fits the
+  // bounds to the markers that have been placed and zooms into them.
+  this.zoomToMarkers = function() {
+    self.map.fitBounds(self.bounds);
+    // self.map.setZoom(12);
+  }
+
+  // Called by changeZip when resetting app to remove all the markers from the map.
   this.removeMarkers = function() {
     $.each(self.marketList(), function(i, market) {
       market.marker.setMap(null);
@@ -86,7 +114,6 @@ var AppViewModel = function() {
   // and calls loadMarketDetails() to get each market's full details.
   this.loadMarkets = function() {
     self.numResults = 0;
-
     var loadData = $.ajax({
       type: "GET",
       contentType: "application/json; charset=utf-8",
@@ -134,9 +161,16 @@ var AppViewModel = function() {
       longitude = parseFloat(longitude);
       var marker = self.addMarker(latitude, longitude);
       var marketItem = {'marketId' : marketId, 'marketName' : marketName,
-          'latitude' : latitude, 'longitude' :longitude, 'address' : address,
+          'latitude' : latitude, 'longitude' : longitude, 'address' : address,
           'schedule' : schedule, 'products' : products, 'marker' : marker};
       self.createMarketItem(marketItem);
+      var marketListLen = $(self.marketList()).length;
+      // Do to AJAX being async, this check has to be done here so we can zoom in
+      // to the map markers once all markers have been placed and added to
+      // marketList.
+      if (marketListLen === self.numResults) {
+        self.zoomToMarkers();
+      }
     });
     loadDetails.fail(function() {
       self.loadMarketDetailsError = "Error Loading Market Details."
