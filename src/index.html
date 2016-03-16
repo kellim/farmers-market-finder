@@ -31,7 +31,7 @@
         <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
           <h2 class="results-title">Results for <span data-bind="text: zip"></span></h2>
           <input placeholder="Enter Search Filter" size="15" class="search-query"
-                 data-bind="value: marketQuery, valueUpdate: 'keyup'">
+                 data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
           <ul class="list-unstyled" data-bind="foreach: filteredMarkets()">
             <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
           </ul>

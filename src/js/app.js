@@ -10,7 +10,7 @@ var Market = function(data, marker) {
 
 var AppViewModel = function() {
   var self = this;
-  // Latitude and Longitude for US Center
+  // Latitude and Longitude for center of US.
   this.US_LAT = 37.8;
   this.US_LNG = -101.5;
 
@@ -57,18 +57,10 @@ var AppViewModel = function() {
     console.log(self.currentMarket().marketName(), self.currentMarket().address());
   }
 
+  // Set the map center and zoom level
   this.setMapLoc = function(lat, lng, zoomLevel) {
     self.map.setCenter({ lat,lng });
     self.map.setZoom(zoomLevel);
-  }
-
-  // Display Info Window with information about the current market.
-  this.displayInfoWindow = function() {
-
-  }
-
-  this.selectMarker = function() {
-
   }
 
   // Visitor clicks Enter New Zip Code button, and app is reset so they can
@@ -84,8 +76,7 @@ var AppViewModel = function() {
     this.marketQuery('');
   }
 
-  // Called by loadMarketDetails to create a marker, then it gets
-  // added to marketList[], the array of Market objects.
+  // Called by loadMarketDetails to create a marker.
   this.addMarker = function(lat, lng) {
     marker = new google.maps.Marker({
       map: self.map,
@@ -96,11 +87,21 @@ var AppViewModel = function() {
     return marker;
   }
 
-  // Called by loadMarketDetails after all markers have been placed. It fits the
-  // bounds to the markers that have been placed and zooms into them.
-  this.zoomToMarkers = function() {
+  // Called by loadMarketDetails after all markers have been placed. It makes the
+  // map fit all the markers on it.
+  this.goToMarkers = function() {
     self.map.fitBounds(self.bounds);
-    // self.map.setZoom(12);
+  }
+
+  // Filter markers as user enters text into search filter box
+  this.filterMarkers = function() {
+    $.each(self.marketList(), function(i, market) {
+      if (market.marketName().toLowerCase().indexOf(self.marketQuery()) >= 0) {
+        market.marker.setVisible(true);
+      } else {
+        market.marker.setVisible(false);
+      }
+    });
   }
 
   // Called by changeZip when resetting app to remove all the markers from the map.
@@ -165,11 +166,11 @@ var AppViewModel = function() {
           'schedule' : schedule, 'products' : products, 'marker' : marker};
       self.createMarketItem(marketItem);
       var marketListLen = $(self.marketList()).length;
-      // Do to AJAX being async, this check has to be done here so we can zoom in
-      // to the map markers once all markers have been placed and added to
-      // marketList.
+      // Do to AJAX being async, this check has to be done here so we can
+      // fit all the map markers on the map once all markers have been
+      // placed and added to marketList.
       if (marketListLen === self.numResults) {
-        self.zoomToMarkers();
+        self.goToMarkers();
       }
     });
     loadDetails.fail(function() {
@@ -177,6 +178,8 @@ var AppViewModel = function() {
     });
   }
 }
+
+
 
 // Callback function for Google Maps API
 var init = function(){
