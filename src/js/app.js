@@ -168,9 +168,16 @@ var AppViewModel = function() {
     });
     loadDetails.done(function(details) {
       var googleLink = decodeURIComponent(details.marketdetails.GoogleLink);
-      var address = details.marketdetails.Address;
-      var schedule = details.marketdetails.Schedule;
-      var products = details.marketdetails.Products;
+      // Using regex to remove <br> tags in returned API content.
+      var address = $.trim(details.marketdetails.Address.replace(/<br\s*\/?\s*>/g,"\n"));
+      var schedule = $.trim(details.marketdetails.Schedule.replace(/<br\s*\/?\s*>/g,"\n"));
+      var products = $.trim(details.marketdetails.Products.replace(/<br\s*\/?\s*>/g,"\n"));
+      // Remove ';' from the end of schedule if it's there.
+      if (schedule.match(';$')) {
+          schedule = schedule.slice(0, -1);
+      }
+      // Replacing the ; separating products with something that looks better.
+      products = products.replace(/;/g, ' *');
       // Extract latitude and longitude from Google link returned by API.
       var latitude = googleLink.slice(googleLink.indexOf('=') + 1, googleLink.indexOf(','));
       latitude = parseFloat(latitude);

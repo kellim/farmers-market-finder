@@ -39,10 +39,13 @@
     </div>
       <div id="info-window-container" class="hidden">
         <div id="info-window" data-bind="with: currentMarket">
-          <h3 data-bind="text: $data.marketName"></h3>
-          <p data-bind="text: $data.address"></p>
-          <p data-bind="text: $data.schedule"></p>
-          <p data-bind="text: $data.products"></p>
+          <h2 class="infowin-title" data-bind="text: $data.marketName"></h2>
+          <p>Address: <span data-bind="text: $data.address"></span></p>
+          <p>Schedule: <span data-bind="text: $data.schedule"></span></p>
+          <p>Products: <span data-bind="text: $data.products"></span></p>
+          <div class="disclaimer">Not all data is available for all markets.
+            This data  may not be up to date. Please check with the Farmers Market
+            to confirm their location, schedule, and/or products before going there.</div>
         </div>
       </div>
    </script>

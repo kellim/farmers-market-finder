@@ -31,7 +31,7 @@ body {
 .app-title {
   width: 100%;
   text-align: center;
-  font: 1.9em 'Patrick Hand', cursive;
+  font: 1.9em 'Patrick Hand', Arial, sans-serif;
   color: #060;
   padding: 0;
   margin: 0;
@@ -62,8 +62,26 @@ body {
   padding: .25em 1em 0;
 }
 .results-title {
-  font: 1.8em 'Patrick Hand', cursive;
+  font: 1.8em 'Patrick Hand', Arial, sans-serif;
   color: #060;
+}
+
+/* InfoWindow */
+
+.info-window {
+  font: 3em Arial, sans-serif;
+}
+
+.infowin-title {
+  font: 1.3em 'Patrick Hand', Arial, sans-serif;
+}
+
+.infowin-type {
+  font-weight: bold;
+}
+
+.disclaimer {
+  font-style: italic;
 }
 
 /* Prevent elements hidden by Knockout from flashing on page load */
