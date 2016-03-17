@@ -36,7 +36,6 @@ var AppViewModel = function() {
   this.numResults = ko.observable(-1);
   this.marketQuery = ko.observable('');
   this.bounds = new google.maps.LatLngBounds();
-
   this.infowindow = new google.maps.InfoWindow({
       content: ''
   });
@@ -55,11 +54,17 @@ var AppViewModel = function() {
     self.marketList.push(new Market(marketItem));
   }
 
-  // Visitor clicks on a market in the results, and this sets currentMarket to
-  // the market that was clicked on.
+  // When a visitor selects a market, this sets currentMarket to the
+  // market that was clicked on, changes the map icon color, and calls
+  // a function to open InfoWindow.
   this.setCurrentMarket = function(market) {
+    // First reset the map icon color for previous currentMarket
+    if (typeof self.currentMarket().marker !== 'undefined') {
+      self.currentMarket().marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+    }
     self.currentMarket(market);
-    self.openInfoWindow(self.currentMarket().marker);
+    market.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+    self.openInfoWindow(market.marker);
   }
 
   // Set the map center and zoom level
@@ -84,6 +89,7 @@ var AppViewModel = function() {
   this.addMarker = function(lat, lng) {
     marker = new google.maps.Marker({
       map: self.map,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
       animation: google.maps.Animation.DROP,
       position: {lat: lat, lng: lng}
     });
@@ -161,15 +167,14 @@ var AppViewModel = function() {
       dataType: 'jsonp'
     });
     loadDetails.done(function(details) {
-      var address, schedule, googleLink, products, latitude, longitude;
-      googleLink = decodeURIComponent(details.marketdetails.GoogleLink);
-      address = details.marketdetails.Address;
-      schedule = details.marketdetails.Schedule;
-      products = details.marketdetails.Products;
+      var googleLink = decodeURIComponent(details.marketdetails.GoogleLink);
+      var address = details.marketdetails.Address;
+      var schedule = details.marketdetails.Schedule;
+      var products = details.marketdetails.Products;
       // Extract latitude and longitude from Google link returned by API.
-      latitude = googleLink.slice(googleLink.indexOf('=') + 1, googleLink.indexOf(','));
+      var latitude = googleLink.slice(googleLink.indexOf('=') + 1, googleLink.indexOf(','));
       latitude = parseFloat(latitude);
-      longitude = googleLink.slice(googleLink.indexOf(',') + 2, googleLink.indexOf('(') -1);
+      var longitude = googleLink.slice(googleLink.indexOf(',') + 2, googleLink.indexOf('(') -1);
       longitude = parseFloat(longitude);
       var marker = self.addMarker(latitude, longitude);
       var marketItem = { 'marketId' : marketId, 'marketName' : marketName,
