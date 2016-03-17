@@ -37,6 +37,15 @@
           </ul>
         </div>
     </div>
+      <div id="info-window-container" class="hidden">
+        <div id="info-window" data-bind="with: currentMarket">
+          <h3 data-bind="text: $data.marketName"></h3>
+          <p data-bind="text: $data.address"></p>
+          <p data-bind="text: $data.schedule"></p>
+          <p data-bind="text: $data.products"></p>
+        </div>
+      </div>
+   </script>
     <script src="js/knockout-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

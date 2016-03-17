@@ -1,4 +1,5 @@
 var Market = function(data, marker) {
+  this.marketId = data.marketId;
   this.marketName = ko.observable(data.marketName);
   this.address = ko.observable(data.address);
   this.schedule = ko.observable(data.schedule);
@@ -25,7 +26,6 @@ var AppViewModel = function() {
   }
   this.initializeMap();
 
-  this.bounds = new google.maps.LatLngBounds();
   this.zip = ko.observable('');
   this.marketList = ko.observableArray([]);
   this.loadMarketsError = ko.observable('');
@@ -35,8 +35,13 @@ var AppViewModel = function() {
    // if results should be visible. It is set to 0 in loadMarkets.
   this.numResults = ko.observable(-1);
   this.marketQuery = ko.observable('');
+  this.bounds = new google.maps.LatLngBounds();
 
-  // Markets filtered by entered search filter
+  this.infowindow = new google.maps.InfoWindow({
+      content: ''
+  });
+
+  // Markets get filtered by entered search filter
   this.filteredMarkets = ko.computed(function() {
     var search = self.marketQuery().toLowerCase();
     return ko.utils.arrayFilter(self.marketList(), function (item) {
@@ -54,7 +59,7 @@ var AppViewModel = function() {
   // the market that was clicked on.
   this.setCurrentMarket = function(market) {
     self.currentMarket(market);
-    console.log(self.currentMarket().marketName(), self.currentMarket().address());
+    self.openInfoWindow(self.currentMarket().marker);
   }
 
   // Set the map center and zoom level
@@ -66,7 +71,6 @@ var AppViewModel = function() {
   // Visitor clicks Enter New Zip Code button, and app is reset so they can
   // try a new zip code.
   this.changeZip = function() {
-    console.log(self.bounds);
     self.zip('');
     self.removeMarkers();
     self.setMapLoc(self.US_LAT, self.US_LNG, 6);
@@ -85,6 +89,13 @@ var AppViewModel = function() {
     });
     self.bounds.extend(marker.getPosition());
     return marker;
+  }
+
+  // Create one Info Window which will get opened by current market.
+  this.openInfoWindow = function(marker) {
+    var infoWinContent = $("#info-window-container").html();
+    self.infowindow.open(self.map, marker);
+    self.infowindow.setContent(infoWinContent);
   }
 
   // Called by loadMarketDetails after all markers have been placed. It makes the
@@ -161,10 +172,20 @@ var AppViewModel = function() {
       longitude = googleLink.slice(googleLink.indexOf(',') + 2, googleLink.indexOf('(') -1);
       longitude = parseFloat(longitude);
       var marker = self.addMarker(latitude, longitude);
-      var marketItem = {'marketId' : marketId, 'marketName' : marketName,
+      var marketItem = { 'marketId' : marketId, 'marketName' : marketName,
           'latitude' : latitude, 'longitude' : longitude, 'address' : address,
-          'schedule' : schedule, 'products' : products, 'marker' : marker};
+          'schedule' : schedule, 'products' : products, 'marker' : marker };
       self.createMarketItem(marketItem);
+      google.maps.event.addListener(marketItem.marker, 'click', (function(marketItem) {
+        return function() {
+          $.each(self.marketList(), function(i, market) {
+            if (market.marketId === marketItem.marketId) {
+              self.setCurrentMarket(market);
+            }
+          });
+        }
+      })(marketItem));
+
       var marketListLen = $(self.marketList()).length;
       // Do to AJAX being async, this check has to be done here so we can
       // fit all the map markers on the map once all markers have been
@@ -178,8 +199,6 @@ var AppViewModel = function() {
     });
   }
 }
-
-
 
 // Callback function for Google Maps API
 var init = function(){
