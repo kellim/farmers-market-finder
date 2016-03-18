@@ -10,6 +10,10 @@ body {
   margin: .75em;
 }
 
+li {
+  padding: .2em 0;
+  }
+
 /* Map */
 #map {
   height: 100%;
@@ -68,16 +72,8 @@ body {
 
 /* InfoWindow */
 
-.info-window {
-  font: 3em Arial, sans-serif;
-}
-
 .infowin-title {
   font: 1.3em 'Patrick Hand', Arial, sans-serif;
-}
-
-.infowin-type {
-  font-weight: bold;
 }
 
 .disclaimer {
