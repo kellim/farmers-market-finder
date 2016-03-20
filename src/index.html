@@ -24,18 +24,18 @@
           <div class="input-group">
             <input data-bind="textInput: zip" type="text" class="form-control"
                    placeholder="Enter Zip Code">
-              <span class="input-group-btn">
-                <button data-bind="click: loadMarkets, enable: zip().length > 0"
-                      type="submit" class="btn btn-default">
-                  <span class="glyphicon glyphicon-search"></span>
-                </button>
-              </span>
+            <span class="input-group-btn">
+              <button data-bind="click: loadMarkets, enable: zip().length > 0"
+                    type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
           </div>
         </form>
         <p data-bind="visible: zipError().length > 0, text: zipError" class="error"></p>
       </div>
       <div class="new-zip hidden" data-bind="visible: marketList().length > 0, css: { hidden: false }">
-        <button data-bind="click: changeZip" type="button" class="btn btn-success btn-sm">Enter New Zip Code</button>
+        <button data-bind="click: changeZip" type="button" class="btn btn-success">Enter New Zip Code</button>
       </div>
       <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed
            or certified by USDA.
@@ -44,8 +44,16 @@
       </div>
       <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
         <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
-        <input placeholder="Enter Search Filter" size="15" class="search-query"
-               data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
+        <div class="input-group">
+          <input placeholder="Enter Search Filter" class="form-control"
+                 data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
+          <span class="input-group-btn">
+            <button data-bind="click: resetMarketQuery, enable: zip().length > 0"
+                    type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+            </span>
+        </div>
         <ul class="list-unstyled" data-bind="foreach: filteredMarkets()">
           <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
         </ul>
@@ -72,7 +80,6 @@
         </div>
       </div>
     </div>
-
     <script src="js/knockout-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

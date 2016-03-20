@@ -156,6 +156,13 @@ var AppViewModel = function() {
     }
   }
 
+  // Reset marketQuery (filter) to empty string. Called when someone clicks
+  // the 'X' next to the 'Enter Search Filter' input box.
+  this.resetMarketQuery = function() {
+    self.marketQuery('');
+    self.filterMarkers();
+  }
+
   // Gets market name and ID data from Farmer's Market API
   // and calls loadMarketDetails() to get each market's full details.
   this.loadMarkets = function() {
