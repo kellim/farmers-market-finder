@@ -45,7 +45,7 @@
       <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
         <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
         <div class="input-group">
-          <input placeholder="Enter Search Filter" class="form-control"
+          <input placeholder="Filter Results" class="form-control"
                  data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
           <span class="input-group-btn">
             <button data-bind="click: resetMarketQuery, enable: zip().length > 0"
