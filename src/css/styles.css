@@ -14,6 +14,7 @@ li {
 .error {
   color: #990000;
   font-weight: bold;
+  margin: 0.5em 1.5em;
 }
 
 /* Prevent elements hidden by Knockout from flashing on page load */
@@ -40,7 +41,7 @@ li {
 
 .app-title {
   text-align: center;
-  font: 2em 'Vidaloka', serif;
+  font: 2.2em 'Vidaloka', serif;
   color: #060;
   margin: 0.2em 0;
 }
@@ -65,8 +66,8 @@ li {
 }
 
 .attribution {
-  font-size: 0.9em;
-  margin: 1em .5em .0 .5em;
+  font-size: 0.85em;
+  margin: 0.5em 1.5em;
 }
 
 .results {

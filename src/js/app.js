@@ -29,8 +29,7 @@ var AppViewModel = function() {
 
   this.zip = ko.observable('');
   this.marketList = ko.observableArray([]);
-  this.loadMarketsError = ko.observable('');
-  this.loadMarketDetailsError = ko.observable('');
+  this.marketDataError = ko.observable('');
   this.zipError = ko.observable('');
   this.currentMarket = ko.observableArray([]);
    // numResults set to -1 as it is compared to marketList length to determine
@@ -86,6 +85,7 @@ var AppViewModel = function() {
     self.marketList.removeAll();
     self.numResults = -1;
     this.marketQuery('');
+    self.marketDataError('');
   }
 
   // Called by loadMarketDetails to create a marker.
@@ -120,7 +120,6 @@ var AppViewModel = function() {
 
   // Filter markers as user enters text into search filter box
   this.filterMarkers = function() {
-    console.log('filterMarkers');
     $.each(self.marketList(), function(i, market) {
       if (market.marketName().toLowerCase().indexOf(self.marketQuery()) >= 0) {
         market.marker.setVisible(true);
@@ -147,7 +146,6 @@ var AppViewModel = function() {
   }
 
   // Return true if the zip code entered by the user is 5 numeric characters.
-  // This does not confirm if it is a valid zip code, only a potential zip code.
   this.zipDataValid = function() {
     if (self.zip().length === 5 && $.isNumeric(self.zip())) {
       self.zipError('');
@@ -156,20 +154,21 @@ var AppViewModel = function() {
       self.zip('');
       return false;
     }
-
   }
 
   // Gets market name and ID data from Farmer's Market API
   // and calls loadMarketDetails() to get each market's full details.
-
   this.loadMarkets = function() {
+    // remove previous error if there was one.
+    if (self.marketDataError().length > 0) {
+      self.marketDataError('');
+    }
     if (self.zipDataValid()) {
       self.numResults = 0;
       var loadData = $.ajax({
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
         url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + self.zip(),
-        dataType: 'jsonp'
+        dataType: 'jsonp',
+        timeout: 8000
       });
       loadData.done(function(data) {
         var id, marketName;
@@ -183,11 +182,10 @@ var AppViewModel = function() {
         });
       });
       loadData.fail(function() {
-        self.loadMarketsError = "Error Loading Market Data."
+        self.marketDataError('Error loading market data. Please try again later.');
       });
     } else {
       self.zipError('Invalid zip code entered. Please enter a 5 digit US zip code.')
-      console.log(self.zipError());
     }
   }
 
@@ -197,11 +195,10 @@ var AppViewModel = function() {
   // createMarketItem() to put a new Market object in an array for each result.
   this.loadMarketDetails = function(marketId, marketName) {
     var loadDetails = $.ajax({
-      type: "GET",
-      contentType: "application/json; charset=utf-8",
       url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id="
       + marketId,
-      dataType: 'jsonp'
+      dataType: 'jsonp',
+      timeout: 8000
     });
     loadDetails.done(function(details) {
       var googleLink = decodeURIComponent(details.marketdetails.GoogleLink);
@@ -235,7 +232,7 @@ var AppViewModel = function() {
         }
       })(marketItem));
       var marketListLen = $(self.marketList()).length;
-      // Do to AJAX being async, this check has to be done here so we can
+      // Due to AJAX being async, this check has to be done here so we can
       // fit all the map markers on the map once all markers have been
       // placed and added to marketList.
       if (marketListLen === self.numResults) {
@@ -243,7 +240,7 @@ var AppViewModel = function() {
       }
     });
     loadDetails.fail(function() {
-      self.loadMarketDetailsError = "Error Loading Market Details."
+      self.marketDataError('Error loading market details. Please try again later.');
     });
   }
 }

@@ -40,6 +40,8 @@
       <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed
            or certified by USDA.
       </div>
+      <div data-bind="visible: marketDataError().length > 0, text: marketDataError" class="error">
+      </div>
       <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
         <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
         <input placeholder="Enter Search Filter" size="15" class="search-query"
