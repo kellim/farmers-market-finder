@@ -17,6 +17,13 @@ li {
   margin: 0.5em 1.5em;
 }
 
+.mapError {
+  font-size: 2em;
+  position: absolute;
+  left: 320px;
+  top: 3em;
+}
+
 /* Prevent elements hidden by Knockout from flashing on page load */
 .hidden {
   display: none;
@@ -103,6 +110,12 @@ li {
 }
 
 @media screen and (max-width: 480px) {
+
+  .mapError {
+    font-size: 1.1em;
+    left: 195px;
+    top: 2em;
+}
 
   .app-title {
     font-size: 1.4em

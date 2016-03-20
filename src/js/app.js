@@ -250,3 +250,13 @@ var init = function(){
   ko.applyBindings(new AppViewModel());
 }
 
+// Function gets called if there is an error loading the map. Using jQuery to write error
+// because the Knockout ViewModel has not loaded yet since it is called if loading the map
+// is a success.
+var mapLoadError = function() {
+  console.log('in mapLoadError');
+  $map = $('#map');
+  $map.addClass('error mapError');
+  $map.html('Farmers Market Finder is unavailable as the map could not be loaded.</p>' +
+    '<p>Please try again later.</p>');
+}
