@@ -73,12 +73,13 @@ li {
   color: #060;
 }
 
-/* Show Button (visible when sidebar minimized) */
+/* Show button goes to bottom when sidebar minimized */
+/* because it blocks InfoWindow content if at the top */
 
 .show-btn {
   position: absolute;
   left: 1em;
-  top: 1em;
+  bottom: 2em;
 }
 
 
@@ -111,11 +112,6 @@ li {
     top: 0.4em;
     width: 190px;
   }
-
-.show-btn {
-  top: auto;
-  bottom:2em;
-}
 
   li {
     padding: 0.4em 0;

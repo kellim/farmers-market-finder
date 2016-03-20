@@ -104,6 +104,9 @@ var AppViewModel = function() {
     var infoWinContent = $("#info-window-container").html();
     self.infowindow.open(self.map, marker);
     self.infowindow.setContent(infoWinContent);
+    if (self.sidebarMaximized() && jQuery(window).width() <= 768) {
+      self.toggleSidebar();
+    }
   }
 
   // Called by loadMarketDetails after all markers have been placed. It makes the
