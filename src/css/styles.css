@@ -9,7 +9,12 @@ body {
 
 li {
   padding: 0.2em 0;
-  }
+}
+
+.error {
+  color: #990000;
+  font-weight: bold;
+}
 
 /* Prevent elements hidden by Knockout from flashing on page load */
 .hidden {
@@ -75,13 +80,11 @@ li {
 
 /* Show button goes to bottom when sidebar minimized */
 /* because it blocks InfoWindow content if at the top */
-
 .show-btn {
   position: absolute;
   left: 1em;
   bottom: 2em;
 }
-
 
 /* InfoWindow */
 
@@ -95,16 +98,13 @@ li {
 
 .disclaimer {
   font-style: italic;
+  font-size: 0.9em;
 }
 
 @media screen and (max-width: 480px) {
+
   .app-title {
     font-size: 1.4em
-  }
-
-  .attribution,
-  .disclaimer {
-    font-size: 0.9em;
   }
 
   .sidebar {

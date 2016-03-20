@@ -31,6 +31,7 @@ var AppViewModel = function() {
   this.marketList = ko.observableArray([]);
   this.loadMarketsError = ko.observable('');
   this.loadMarketDetailsError = ko.observable('');
+  this.zipError = ko.observable('');
   this.currentMarket = ko.observableArray([]);
    // numResults set to -1 as it is compared to marketList length to determine
    // if results should be visible. It is set to 0 in loadMarkets.
@@ -104,6 +105,8 @@ var AppViewModel = function() {
     var infoWinContent = $("#info-window-container").html();
     self.infowindow.open(self.map, marker);
     self.infowindow.setContent(infoWinContent);
+    // Hide Sidebar when InfoWindow pops up on a mobile device
+    // so it does not stay in front of the InfoWindow.
     if (self.sidebarMaximized() && jQuery(window).width() <= 768) {
       self.toggleSidebar();
     }
@@ -143,31 +146,50 @@ var AppViewModel = function() {
     }
   }
 
+  // Return true if the zip code entered by the user is 5 numeric characters.
+  // This does not confirm if it is a valid zip code, only a potential zip code.
+  this.zipDataValid = function() {
+    if (self.zip().length === 5 && $.isNumeric(self.zip())) {
+      self.zipError('');
+      return true;
+    } else {
+      self.zip('');
+      return false;
+    }
+
+  }
+
   // Gets market name and ID data from Farmer's Market API
   // and calls loadMarketDetails() to get each market's full details.
+
   this.loadMarkets = function() {
-    self.numResults = 0;
-    var loadData = $.ajax({
-      type: "GET",
-      contentType: "application/json; charset=utf-8",
-      url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + this.zip(),
-      dataType: 'jsonp'
-    });
-    loadData.done(function(data) {
-      var id, marketName;
-      self.numResults = $(data.results).length;
-      $.each(data.results, function(i, marketData) {
-        marketName = marketData.marketname;
-        marketId = marketData.id;
-        // Remove number (distance) preceding name in data returned by API
-        marketName = marketName.slice(marketName.indexOf(' ') + 1);
-        self.loadMarketDetails(marketId, marketName);
+    if (self.zipDataValid()) {
+      self.numResults = 0;
+      var loadData = $.ajax({
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + self.zip(),
+        dataType: 'jsonp'
       });
-    });
-    loadData.fail(function() {
-      self.loadMarketsError = "Error Loading Market Data."
-    });
-  };
+      loadData.done(function(data) {
+        var id, marketName;
+        self.numResults = $(data.results).length;
+        $.each(data.results, function(i, marketData) {
+          marketName = marketData.marketname;
+          marketId = marketData.id;
+          // Remove number (distance) preceding name in data returned by API
+          marketName = marketName.slice(marketName.indexOf(' ') + 1);
+          self.loadMarketDetails(marketId, marketName);
+        });
+      });
+      loadData.fail(function() {
+        self.loadMarketsError = "Error Loading Market Data."
+      });
+    } else {
+      self.zipError('Invalid zip code entered. Please enter a 5 digit US zip code.')
+      console.log(self.zipError());
+    }
+  }
 
   // Called by loadMarkets() to get each market's full details since the initial
   // AJAX call only provides a market's name and ID. This function gets the

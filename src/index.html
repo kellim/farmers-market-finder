@@ -32,6 +32,7 @@
               </span>
           </div>
         </form>
+        <p data-bind="visible: zipError().length > 0, text: zipError" class="error"></p>
       </div>
       <div class="new-zip hidden" data-bind="visible: marketList().length > 0, css: { hidden: false }">
         <button data-bind="click: changeZip" type="button" class="btn btn-success btn-sm">Enter New Zip Code</button>
