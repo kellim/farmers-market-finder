@@ -3,16 +3,18 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font: .9em Verdana, Helvetica, Arial, sans-serif;
-}
-
-.btn {
-  margin: .75em;
+  font: 0.9em Verdana, Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 li {
-  padding: .2em 0;
+  padding: 0.2em 0;
   }
+
+/* Prevent elements hidden by Knockout from flashing on page load */
+.hidden {
+  display: none;
+}
 
 /* Map */
 #map {
@@ -26,81 +28,97 @@ li {
   left: 1em;
   top: 1em;
   z-index: 5;
-  width: 270px;
+  width: 310px;
   height: 95%;
-  margin-bottom:20px;
   overflow: auto;
 }
 
 .app-title {
-  width: 100%;
   text-align: center;
-  font: 1.9em 'Patrick Hand', Arial, sans-serif;
+  font: 2em 'Vidaloka', serif;
   color: #060;
-  padding: 0;
-  margin: 0;
+  margin: 0.2em 0;
 }
 
-.btn-min {
-  text-align: right;
-  padding: 5px 7px;
-  color: #666;
+.hide-btn,
+.show-btn {
+    margin: 0.5em 0 0 0.4em;
+}
+
+.hide-btn {
+  text-align: left;
   font-size: 1.2em;
 }
 
 .zip {
-  padding: .25em 1em 0;
+  padding: 0.5em 1em 0;
 }
 
 .new-zip {
   text-align: center;
-  font-size: .5em;
+  font-size: 0.5em;
 }
 
 .attribution {
-  font-size: .9em;
-  padding: .25em 1em 0;
+  font-size: 0.9em;
+  margin: 1em .5em .0 .5em;
 }
 
 .results {
-  padding: .25em 1em 0;
+  padding: 0.25em 1em 0;
 }
+
 .results-title {
-  font: 1.8em 'Patrick Hand', Arial, sans-serif;
+  font: 1.5em 'Vidaloka', serif;;
   color: #060;
 }
 
+/* Show Button (visible when sidebar minimized) */
+
+.show-btn {
+  position: absolute;
+  left: 1em;
+  top: 1em;
+}
+
+
 /* InfoWindow */
 
+.info-window-container {
+  overflow-y: auto;
+}
+
 .infowin-title {
-  font: 1.3em 'Patrick Hand', Arial, sans-serif;
+  font: 1.3em 'Vidaloka', serif;
 }
 
 .disclaimer {
   font-style: italic;
 }
 
-/* Prevent elements hidden by Knockout from flashing on page load */
-.hidden {
-  display: none;
+@media screen and (max-width: 480px) {
+  .app-title {
+    font-size: 1.4em
+  }
+
+  .attribution,
+  .disclaimer {
+    font-size: 0.9em;
+  }
+
+  .sidebar {
+    left: 0.4em;
+    top: 0.4em;
+    width: 190px;
+  }
+
+.show-btn {
+  top: auto;
+  bottom:2em;
 }
 
-@media screen and (max-width: 480px) {
-  .sidebar {
-    width: 170px;
-  }
-
   li {
-    padding: .4em 0;
-  }
-
-  .minus-btn {
-    padding: 7px 11px;
-    font-size: 1.2em;
-  }
-
-  .zip {
-    font-size: .8em;
+    padding: 0.4em 0;
   }
 
   .results-title {

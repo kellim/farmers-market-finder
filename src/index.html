@@ -5,50 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Farmers Market Finder - Neighborhood Map Project</title>
-    <link href='https://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
-
   </head>
   <body>
     <div id="map"></div>
-    <div class="sidebar">
-        <div class="btn-min">
-            <span class="glyphicon glyphicon-minus-sign"</span>
-        </div>
-        <h1 class="app-title">Farmers Market Finder</h1>
-        <div class="zip" data-bind="visible: marketList().length === 0">
-          Enter your 5 digit US zip code to find Farmers Markets near you.
-          <input data-bind="textInput: zip" type="text" placeholder="Enter Zip Code" size=10 class="search-query">
-          <button data-bind="click: loadMarkets, enable: zip().length > 0" type="button"
-                  class="btn">Search</button>
-        </div>
-        <div class="new-zip hidden" data-bind="visible: marketList().length > 0, css: { hidden: false }">
-          <button data-bind="click: changeZip" type="button" class="btn btn-success btn-sm">Enter New Zip Code</button>
-        </div>
-        <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed
-             or certified by USDA.</div>
-        <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
-          <h2 class="results-title">Results for <span data-bind="text: zip"></span></h2>
-          <input placeholder="Enter Search Filter" size="15" class="search-query"
-                 data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
-          <ul class="list-unstyled" data-bind="foreach: filteredMarkets()">
-            <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
-          </ul>
-        </div>
+    <div data-bind="visible: sidebarMaximized" class="sidebar">
+      <div  class="hide-btn">
+        <button data-bind="click: toggleSidebar" type="button"
+          class="btn btn-success"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
+      </div>
+      <h1 class="app-title">Farmers Market Finder</h1>
+      <div class="zip" data-bind="visible: marketList().length === 0">
+        <form role="search">
+          <div class="input-group">
+            <input data-bind="textInput: zip" type="text" class="form-control"
+                   placeholder="Enter Zip Code">
+              <span class="input-group-btn">
+                <button data-bind="click: loadMarkets, enable: zip().length > 0"
+                      type="submit" class="btn btn-default">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+          </div>
+        </form>
+      </div>
+      <div class="new-zip hidden" data-bind="visible: marketList().length > 0, css: { hidden: false }">
+        <button data-bind="click: changeZip" type="button" class="btn btn-success btn-sm">Enter New Zip Code</button>
+      </div>
+      <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed
+           or certified by USDA.
+      </div>
+      <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
+        <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
+        <input placeholder="Enter Search Filter" size="15" class="search-query"
+               data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
+        <ul class="list-unstyled" data-bind="foreach: filteredMarkets()">
+          <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
+        </ul>
+      </div>
     </div>
-      <div id="info-window-container" class="hidden">
-        <div id="info-window" data-bind="with: currentMarket">
-          <h2 class="infowin-title" data-bind="text: $data.marketName"></h2>
-          <p>Address: <span data-bind="text: $data.address"></span></p>
-          <p>Schedule: <span data-bind="text: $data.schedule"></span></p>
-          <p>Products: <span data-bind="text: $data.products"></span></p>
-          <div class="disclaimer">Not all data is available for all markets.
-            This data  may not be up to date. Please check with the Farmers Market
-            to confirm their location, schedule, and/or products before going there.</div>
+
+    <!-- Show Button revealed after visitor clicks hide button-->
+    <div data-bind="css: { hidden: false }, visible: !sidebarMaximized()" class="show-btn hidden">
+      <button data-bind="click: toggleSidebar" type="button"
+              class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>
+              Show
+      </button>
+    </div>
+
+    <!-- Content to be shown in InfoWindow -->
+    <div id="info-window-container" class="hidden">
+      <div id="info-window" data-bind="with: currentMarket">
+        <h2 class="infowin-title" data-bind="text: $data.marketName"></h2>
+        <p>Address: <span data-bind="text: $data.address"></span></p>
+        <p>Schedule: <span data-bind="text: $data.schedule"></span></p>
+        <p>Products: <span data-bind="text: $data.products"></span></p>
+        <div class="disclaimer">Data may not be complete or up-to-date, so please confirm details
+              with the Farmer's Market before going there.
         </div>
       </div>
-   </script>
+    </div>
+
     <script src="js/knockout-3.4.0.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

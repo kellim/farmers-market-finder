@@ -20,9 +20,10 @@ var AppViewModel = function() {
     var mapOptions = {
       center: new google.maps.LatLng(self.US_LAT,self.US_LNG),
       mapTypeControl: false,
+      streetViewControl: false,
       zoom: 6
     };
-  self.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    self.map = new google.maps.Map(document.getElementById('map'), mapOptions);
   }
   this.initializeMap();
 
@@ -35,6 +36,7 @@ var AppViewModel = function() {
    // if results should be visible. It is set to 0 in loadMarkets.
   this.numResults = ko.observable(-1);
   this.marketQuery = ko.observable('');
+  this.sidebarMaximized = ko.observable(true);
   this.bounds = new google.maps.LatLngBounds();
   this.infowindow = new google.maps.InfoWindow({
       content: ''
@@ -112,6 +114,7 @@ var AppViewModel = function() {
 
   // Filter markers as user enters text into search filter box
   this.filterMarkers = function() {
+    console.log('filterMarkers');
     $.each(self.marketList(), function(i, market) {
       if (market.marketName().toLowerCase().indexOf(self.marketQuery()) >= 0) {
         market.marker.setVisible(true);
@@ -126,6 +129,15 @@ var AppViewModel = function() {
     $.each(self.marketList(), function(i, market) {
       market.marker.setMap(null);
     });
+  }
+
+  // Toggle the sidebar on and off
+  this.toggleSidebar = function() {
+    if (self.sidebarMaximized()) {
+      self.sidebarMaximized(false);
+    } else {
+      self.sidebarMaximized(true);
+    }
   }
 
   // Gets market name and ID data from Farmer's Market API
@@ -176,7 +188,7 @@ var AppViewModel = function() {
       if (schedule.match(';$')) {
           schedule = schedule.slice(0, -1);
       }
-      // Replacing the ; separating products with something that looks better.
+      // Replacing the ; separating products with * looks better.
       products = products.replace(/;/g, ' *');
       // Extract latitude and longitude from Google link returned by API.
       var latitude = googleLink.slice(googleLink.indexOf('=') + 1, googleLink.indexOf(','));
@@ -197,7 +209,6 @@ var AppViewModel = function() {
           });
         }
       })(marketItem));
-
       var marketListLen = $(self.marketList()).length;
       // Do to AJAX being async, this check has to be done here so we can
       // fit all the map markers on the map once all markers have been
