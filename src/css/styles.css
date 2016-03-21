@@ -129,7 +129,7 @@ a:hover {
   font-size: 0.9em;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
 
   .mapError {
     font-size: 1.1em;
