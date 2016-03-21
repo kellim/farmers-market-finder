@@ -149,7 +149,7 @@ a {
   </head>
   <body>
     <div id="map"></div>
-    <div data-bind="visible: sidebarMaximized" class="sidebar">
+    <div data-bind="visible: sidebarMaximized, css: { hidden: false }" class="sidebar hidden">
       <div class="hide-btn">
         <button data-bind="click: toggleSidebar" type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
       </div>
