@@ -19,6 +19,7 @@
           class="btn btn-success btn-xs"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
       </div>
       <h1 class="app-title">Farmers Market Finder</h1>
+      <!-- Zip Code input box is only visible when there are no results returned -->
       <div class="zip" data-bind="visible: marketList().length === 0">
         <form role="search">
           <div class="input-group">
@@ -34,33 +35,42 @@
         </form>
         <p data-bind="visible: zipError().length > 0, text: zipError" class="error"></p>
       </div>
+      <!-- 'Enter New Zip Code' button is shown if there are results and Zip Code search box is hidden.
+            Clicking it resets the app and reveals Zip Code search box again. -->
       <div class="new-zip hidden" data-bind="visible: marketList().length > 0, css: { hidden: false }">
         <button data-bind="click: changeZip" type="button" class="btn btn-success">Enter New Zip Code</button>
       </div>
+      <!-- USDA requires that you place this text prominently on your app -->
       <div class="attribution">This product uses USDA’s National Farmers Market API but is not endorsed
            or certified by USDA.
       </div>
+      <!-- Show error message when market API data cannot be retrieved -->
       <div data-bind="visible: marketDataError().length > 0, text: marketDataError" class="error">
       </div>
+      <!-- Results appear only after all results have been processed in the app. If you add results
+            one by one to the list on the page as they are created, it looks choppy. -->
       <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
         <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
         <div class="input-group">
           <input placeholder="Filter Results" class="form-control"
                  data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
           <span class="input-group-btn market-query">
-            <button data-bind="click: resetMarketQuery, enable: zip().length > 0"
+            <button data-bind="click: resetMarketQuery"
                     type="button" class="btn btn-default">
               <span class="glyphicon glyphicon-remove"></span>
             </button>
-            </span>
+          </span>
         </div>
+        <!-- List of market results created by Knockout -->
         <ul class="list-unstyled market-list" data-bind="foreach: filteredMarkets()">
           <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
         </ul>
       </div>
     </div>
 
-    <!-- Show Button revealed after visitor clicks hide button-->
+    <!-- Show Button revealed after visitor clicks hide button. It will be at the bottom of the
+         screen because if it's at the top, it will show up on top of InfoWindows, especially
+         on Mobile. -->
     <div data-bind="css: { hidden: false }, visible: !sidebarMaximized()" class="show-btn hidden">
       <button data-bind="click: toggleSidebar" type="button"
               class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>
@@ -68,7 +78,8 @@
       </button>
     </div>
 
-    <!-- Content to be shown in InfoWindow -->
+    <!-- Content to be shown in InfoWindow. Without the $data prefix on the observables,
+         the console will show an error even though the data is shown in the InfoWindow. -->
     <div id="info-window-container" class="hidden">
       <div id="info-window" data-bind="with: currentMarket">
         <h2 class="infowin-title" data-bind="text: $data.marketName"></h2>
