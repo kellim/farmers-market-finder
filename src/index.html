@@ -16,7 +16,7 @@
     <div data-bind="visible: sidebarMaximized" class="sidebar">
       <div  class="hide-btn">
         <button data-bind="click: toggleSidebar" type="button"
-          class="btn btn-success"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
+          class="btn btn-success btn-xs"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
       </div>
       <h1 class="app-title">Farmers Market Finder</h1>
       <div class="zip" data-bind="visible: marketList().length === 0">
@@ -47,14 +47,14 @@
         <div class="input-group">
           <input placeholder="Filter Results" class="form-control"
                  data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
-          <span class="input-group-btn">
+          <span class="input-group-btn market-query">
             <button data-bind="click: resetMarketQuery, enable: zip().length > 0"
                     type="button" class="btn btn-default">
               <span class="glyphicon glyphicon-remove"></span>
             </button>
             </span>
         </div>
-        <ul class="list-unstyled" data-bind="foreach: filteredMarkets()">
+        <ul class="list-unstyled market-list" data-bind="foreach: filteredMarkets()">
           <li><a href="#" data-bind="text: marketName, click: $parent.setCurrentMarket"></a></li>
         </ul>
       </div>

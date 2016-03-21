@@ -10,13 +10,15 @@ body {
 li {
   padding: 0.2em 0;
 }
+
 a,
 a:hover,
 a:focus {
   text-decoration: none;
 }
 
-a {
+a,
+a:focus {
   color: #004d00;
 }
 
@@ -25,24 +27,14 @@ a:hover {
   text-decoration: none;
 }
 
-a:focus {
-  color: #004d00;
-}
-
 .error {
   color: #990000;
   font-weight: bold;
   margin: 0.5em 1.5em;
 }
 
-.mapError {
-  font-size: 2em;
-  position: absolute;
-  left: 320px;
-  top: 3em;
-}
-
 /* Prevent elements hidden by Knockout from flashing on page load */
+/* You also need to do a data-bind to the element- css: { hidden: false } */
 .hidden {
   display: none;
 }
@@ -50,6 +42,13 @@ a:focus {
 /* Map */
 #map {
   height: 100%;
+}
+
+.mapError {
+  font-size: 2em;
+  position: absolute;
+  left: 320px;
+  top: 3em;
 }
 
 /* Sidebar */
@@ -71,6 +70,37 @@ a:focus {
   margin: 0.2em 0;
 }
 
+.zip {
+  margin: 0.5em 1em 0;
+}
+
+.new-zip {
+  text-align: center;
+}
+
+.attribution {
+  font-size: 0.85em;
+  margin: 0.5em 1.4em;
+}
+
+.market-query {
+  margin: 1em;
+}
+
+.market-list {
+  margin: 0.25em 0 0 0 ;
+}
+
+.results {
+  margin: 0.3em 1em 0 1em;
+}
+
+.results-title {
+  font: 1.5em 'Vidaloka', serif;;
+  color: #060;
+  margin: 0 0 0.25em 0;
+}
+
 .hide-btn,
 .show-btn {
     margin: 0.5em 0 0 0.4em;
@@ -79,29 +109,6 @@ a:focus {
 .hide-btn {
   text-align: left;
   font-size: 1.2em;
-}
-
-.zip {
-  padding: 0.5em 1em 0;
-}
-
-.new-zip {
-  text-align: center;
-  font-size: 0.5em;
-}
-
-.attribution {
-  font-size: 0.85em;
-  margin: 0.5em 1.5em;
-}
-
-.results {
-  padding: 0.25em 1em 0;
-}
-
-.results-title {
-  font: 1.5em 'Vidaloka', serif;;
-  color: #060;
 }
 
 /* Show button goes to bottom when sidebar minimized */
@@ -113,10 +120,6 @@ a:focus {
 }
 
 /* InfoWindow */
-
-.info-window-container {
-  overflow-y: auto;
-}
 
 .infowin-title {
   font: 1.3em 'Vidaloka', serif;
@@ -131,7 +134,7 @@ a:focus {
 
   .mapError {
     font-size: 1.1em;
-    left: 195px;
+    left: 203px;
     top: 2em;
 }
 
@@ -146,7 +149,7 @@ a:focus {
   }
 
   li {
-    padding: 0.4em 0;
+    margin: 0.4em 0;
   }
 
   .results-title {
