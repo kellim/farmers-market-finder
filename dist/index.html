@@ -6,21 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Farmers Market Finder - Neighborhood Map Project</title>
     <style type="text/css">
-html,
-body {
+a {
+  text-decoration: none;
+}
+
+#map,
+body,
+html {
   height: 100%;
+}
+
+.app-title,
+.new-zip {
+  text-align: center;
+}
+
+body,
+html {
   margin: 0;
   padding: 0;
-  font: 0.9em Verdana, Helvetica, Arial, sans-serif;
+  font: .9em Verdana,Helvetica,Arial,sans-serif;
   overflow: hidden;
 }
 
 li {
-  padding: 0.2em 0;
-}
-
-a {
-  text-decoration: none;
+  padding: .2em 0;
 }
 
 a {
@@ -28,23 +38,23 @@ a {
 }
 
 .error {
-  color: #990000;
-  font-weight: bold;
-  margin: 0.5em 1.5em;
+  color: #900;
+  font-weight: 700;
+  margin: .5em 1.5em;
 }
 
 .hidden {
   display: none;
 }
 
-#map {
-  height: 100%;
+.show-btn,
+.sidebar {
+  position: absolute;
+  left: 1em;
 }
 
 .sidebar {
-  position: absolute;
-  background: url(/src/img/bg.png);
-  left: 1em;
+  background: url(/dist/img/bg.png);
   top: 1em;
   z-index: 5;
   width: 310px;
@@ -53,23 +63,18 @@ a {
 }
 
 .app-title {
-  text-align: center;
-  font: 2.2em 'Vidaloka', serif;
+  font: 2.2em Vidaloka,serif;
   color: #060;
-  margin: 0.2em 0;
+  margin: .2em 0;
 }
 
 .zip {
-  margin: 0.5em 1em 0;
-}
-
-.new-zip {
-  text-align: center;
+  margin: .5em 1em 0;
 }
 
 .attribution {
-  font-size: 0.85em;
-  margin: 0.5em 1.4em;
+  font-size: .85em;
+  margin: .5em 1.4em;
 }
 
 .market-query {
@@ -77,22 +82,22 @@ a {
 }
 
 .market-list {
-  margin: 0.25em 0 0 0;
+  margin: .25em 0 0;
 }
 
 .results {
-  margin: 0.3em 1em 0 1em;
+  margin: .3em 1em 0;
 }
 
 .results-title {
-  font: 1.5em 'Vidaloka', serif;
+  font: 1.5em Vidaloka,serif;
   color: #060;
-  margin: 0 0 0.25em 0;
+  margin: 0 0 .25em;
 }
 
 .hide-btn,
 .show-btn {
-  margin: 0.5em 0 0 0.4em;
+  margin: .5em 0 0 .4em;
 }
 
 .hide-btn {
@@ -101,33 +106,31 @@ a {
 }
 
 .show-btn {
-  position: absolute;
-  left: 1em;
   bottom: 2em;
 }
 
 .infowin-title {
-  font: 1.3em 'Vidaloka', serif;
+  font: 1.3em Vidaloka,serif;
 }
 
 .disclaimer {
   font-style: italic;
-  font-size: 0.9em;
+  font-size: .9em;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width:480px) {
   .app-title {
     font-size: 1.4em;
   }
 
   .sidebar {
-    left: 0.4em;
-    top: 0.4em;
+    left: .4em;
+    top: .4em;
     width: 200px;
   }
 
   li {
-    margin: 0.4em 0;
+    margin: .4em 0;
   }
 
   .results-title {

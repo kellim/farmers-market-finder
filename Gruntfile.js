@@ -25,6 +25,7 @@ module.exports = function(grunt) {
         options: {
           process: function (content, srcpath) {
             content = content.replace(/app.js/g, 'app.min.js');
+            content = content.replace(/src\/img\/bg.png/g, 'dist/img/bg.png');
             return content.replace(/styles.css/g, 'styles.min.css');
           },
         },
@@ -43,7 +44,7 @@ module.exports = function(grunt) {
         options: {
           base: './',
           css: [
-            'src/css/styles.css'
+            'dist/css/styles.min.css'
           ],
           width: 1366,
           height: 768
