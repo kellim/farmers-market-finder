@@ -1,0 +1,29 @@
+{
+  "name": "neighborhood-map",
+  "version": "1.0.0",
+  "description": "This is the fifth project for Udacity's Front-End Web Developer Nanodegree.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kellim/Udacity-FEND-P5-Neighborhood-Map.git"
+  },
+  "keywords": [
+    "knockout",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kellim/Udacity-FEND-P5-Neighborhood-Map/issues"
+  },
+  "homepage": "https://github.com/kellim/Udacity-FEND-P5-Neighborhood-Map#readme",
+  "devDependencies": {
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-critical": "^0.2.0"
+  }
+}

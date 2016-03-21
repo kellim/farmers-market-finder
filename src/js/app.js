@@ -71,7 +71,7 @@ var AppViewModel = function() {
 
   // Set the map center and zoom level.
   this.setMapLoc = function(lat, lng, zoomLevel) {
-    self.map.setCenter({ lat,lng });
+    self.map.setCenter({ lat: lat, lng: lng });
     self.map.setZoom(zoomLevel);
   };
 
