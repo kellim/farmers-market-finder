@@ -5,165 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Farmers Market Finder - Neighborhood Map Project</title>
-    <style type="text/css">
-a {
-  text-decoration: none;
-}
-
-#map,
-body,
-html {
-  height: 100%;
-}
-
-.app-title,
-.new-zip {
-  text-align: center;
-}
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-  font: .9em Verdana,Helvetica,Arial,sans-serif;
-  overflow: hidden;
-}
-
-li {
-  padding: .2em 0;
-}
-
-a {
-  color: #004d00;
-}
-
-.error {
-  color: #900;
-  font-weight: 700;
-  margin: .5em 1.5em;
-}
-
-.hidden {
-  display: none;
-}
-
-.show-btn,
-.sidebar {
-  position: absolute;
-  left: 1em;
-}
-
-.sidebar {
-  background: url(/dist/img/bg.png);
-  top: 1em;
-  z-index: 5;
-  width: 310px;
-  height: 95%;
-  overflow: auto;
-}
-
-.app-title {
-  font: 2.2em Vidaloka,serif;
-  color: #060;
-  margin: .2em 0;
-}
-
-.zip {
-  margin: .5em 1em 0;
-}
-
-.attribution {
-  font-size: .85em;
-  margin: .5em 1.4em;
-}
-
-.market-query {
-  margin: 1em;
-}
-
-.market-list {
-  margin: .25em 0 0;
-}
-
-.results {
-  margin: .3em 1em 0;
-}
-
-.results-title {
-  font: 1.5em Vidaloka,serif;
-  color: #060;
-  margin: 0 0 .25em;
-}
-
-.hide-btn,
-.show-btn {
-  margin: .5em 0 0 .4em;
-}
-
-.hide-btn {
-  text-align: left;
-  font-size: 1.2em;
-}
-
-.show-btn {
-  bottom: 2em;
-}
-
-.infowin-title {
-  font: 1.3em Vidaloka,serif;
-}
-
-.disclaimer {
-  font-style: italic;
-  font-size: .9em;
-}
-
-@media screen and (max-width:480px) {
-  .app-title {
-    font-size: 1.4em;
-  }
-
-  .sidebar {
-    left: .4em;
-    top: .4em;
-    width: 200px;
-  }
-
-  li {
-    margin: .4em 0;
-  }
-
-  .results-title {
-    font: 1em;
-  }
-}
-
-</style>
-<script id="loadcss">
-(function(u,s){!function(e){"use strict";var n=function(n,t,o){var l,r=e.document,i=r.createElement("link");if(t)l=t;else{var a=(r.body||r.getElementsByTagName("head")[0]).childNodes;l=a[a.length-1]}var d=r.styleSheets;i.rel="stylesheet",i.href=n,i.media="only x",l.parentNode.insertBefore(i,t?l:l.nextSibling);var f=function(e){for(var n=i.href,t=d.length;t--;)if(d[t].href===n)return e();setTimeout(function(){f(e)})};return i.onloadcssdefined=f,f(function(){i.media=o||"all"}),i};"undefined"!=typeof module?module.exports=n:e.loadCSS=n}("undefined"!=typeof global?global:this);for(var i in u){loadCSS(u[i],s);}}(['https://fonts.googleapis.com/css?family=Vidaloka','https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css','css/styles.min.css'],document.getElementById("loadcss")));
-</script>
-<noscript>
-<link href="https://fonts.googleapis.com/css?family=Vidaloka" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<link rel="stylesheet" href="css/styles.min.css">
-</noscript>
-    
-    
+    <link href='https://fonts.googleapis.com/css?family=Vidaloka' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.min.css">
   </head>
   <body>
     <div id="map"></div>
     <div data-bind="visible: sidebarMaximized, css: { hidden: false }" class="sidebar hidden">
-      <div class="hide-btn">
-        <button data-bind="click: toggleSidebar" type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
+      <div  class="hide-btn">
+        <button data-bind="click: toggleSidebar" type="button"
+          class="btn btn-success btn-xs"><span class="glyphicon glyphicon-minus-sign"></span> Hide</button>
       </div>
       <h1 class="app-title">Farmers Market Finder</h1>
       <!-- Zip Code input box is only visible when there are no results returned -->
       <div class="zip" data-bind="visible: marketList().length === 0">
         <form role="search">
           <div class="input-group">
-            <input data-bind="textInput: zip" type="text" class="form-control" placeholder="Enter Zip Code">
+            <input data-bind="textInput: zip" type="text" class="form-control"
+                   placeholder="Enter Zip Code">
             <span class="input-group-btn">
-              <button data-bind="click: loadMarkets, enable: zip().length > 0" type="submit" class="btn btn-default">
+              <button data-bind="click: loadMarkets, enable: zip().length > 0"
+                    type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
               </button>
             </span>
@@ -188,9 +52,11 @@ a {
       <div class="results hidden" data-bind="visible: marketList().length === numResults, css: { hidden: false }">
         <h2 class="results-title">Results near <span data-bind="text: zip"></span></h2>
         <div class="input-group">
-          <input placeholder="Filter Results" class="form-control" data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
+          <input placeholder="Filter Results" class="form-control"
+                 data-bind="value: marketQuery, valueUpdate: 'keyup', event: { keyup: filterMarkers }">
           <span class="input-group-btn market-query">
-            <button data-bind="click: resetMarketQuery" type="button" class="btn btn-default">
+            <button data-bind="click: resetMarketQuery"
+                    type="button" class="btn btn-default">
               <span class="glyphicon glyphicon-remove"></span>
             </button>
           </span>
@@ -206,7 +72,8 @@ a {
          screen because if it's at the top, it will show up on top of InfoWindows, especially
          on Mobile. -->
     <div data-bind="css: { hidden: false }, visible: !sidebarMaximized()" class="show-btn hidden">
-      <button data-bind="click: toggleSidebar" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>
+      <button data-bind="click: toggleSidebar" type="button"
+              class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span>
               Show
       </button>
     </div>

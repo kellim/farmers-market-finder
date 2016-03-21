@@ -23,7 +23,6 @@
   "devDependencies": {
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^1.0.1",
-    "grunt-contrib-uglify": "^1.0.1",
-    "grunt-critical": "^0.2.0"
+    "grunt-contrib-uglify": "^1.0.1"
   }
 }

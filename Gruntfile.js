@@ -25,7 +25,6 @@ module.exports = function(grunt) {
         options: {
           process: function (content, srcpath) {
             content = content.replace(/app.js/g, 'app.min.js');
-            content = content.replace(/src\/img\/bg.png/g, '/img/bg.png');
             return content.replace(/styles.css/g, 'styles.min.css');
           },
         },
@@ -38,25 +37,10 @@ module.exports = function(grunt) {
         src: 'src/js/lib/knockout-3.4.0.js',
         dest: 'dist/js/lib/knockout-3.4.0.js'
       }
-    },
-    critical: {
-      main: {
-        options: {
-          base: './',
-          css: [
-            'dist/css/styles.min.css'
-          ],
-          width: 1366,
-          height: 768
-        },
-        src: 'dist/index.html',
-        dest: 'dist/index.html'
-      }
     }
   });
-  grunt.loadNpmTasks('grunt-critical');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.registerTask('default', ['cssmin', 'uglify', 'copy', 'critical']);
+  grunt.registerTask('default', ['cssmin', 'uglify', 'copy']);
 };
