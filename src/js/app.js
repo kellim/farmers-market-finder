@@ -66,6 +66,12 @@ var AppViewModel = function() {
     }
     self.currentMarket(market);
     market.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+    // To prevent the sidebar from blocking the InfoWindow, pan to the selected marker on
+    // larger screens where the sidebar does not get hidden when opening an InfoWindow.
+    // If you pan to a marker on a smaller screen it can look jumpy.
+    if (jQuery(window).width() > 768) {
+      self.map.panTo(market.marker.getPosition());
+    }
     self.openInfoWindow(market.marker);
   };
 

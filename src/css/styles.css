@@ -124,6 +124,11 @@ a:hover {
   font: 1.3em 'Vidaloka', serif;
 }
 
+.gm-style-iw
+{
+  max-width: 350px;
+}
+
 .disclaimer {
   font-style: italic;
   font-size: 0.9em;
