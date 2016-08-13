@@ -4,7 +4,7 @@ This is the _Neighborhood Map_ project for Udacity's Front-End Web Developer Nan
 This project uses the Google Maps API and USDA National Farmers Market Directory API to create a mashup where visitors can search for Farmers Markets by entering a zip code, then Farmers Markets near that zip code will be shown on the map. You can click on a marker or an item in the result list to view more info about the market such as address, schedule, and products. Technologies used include JavaScript, Knockout, jQuery, HTML, CSS, and Bootstrap.
 
 ## View Project Online
-View the site online at http://kellim.github.io/farmers-market-finder
+View the site online at http://kellimb.github.io/farmers-market-finder
 
 ## Run Project Locally
 Note: I built this project on a Windows 7 PC. Instructions could vary slightly on a different OS.
