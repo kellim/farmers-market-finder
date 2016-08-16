@@ -11,7 +11,7 @@ Note: I built this project on a Windows 7 PC. Instructions could vary slightly o
 
 To run the project locally:
 * Download [this repository](https://github.com/kellim/farmers-market-finder) to your machine or Fork the repository. To simply download the files, you can click the `Download Zip` button on the GitHub page for the repository, and then it will download all the files to your computer. You'll need to unzip the files before working with them.
-* Update `YOUR_KEY_GOES_HERE` in the following line in index.html with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
+* Update `YOUR_KEY_GOES_HERE` in the following line in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
 `<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`
 * Install [Node.js](https://nodejs.org) on your computer if you don't already have it installed.
 * Install [Grunt](http://gruntjs.com) on your computer. See the [Getting Started](http://gruntjs.com/getting-started) guide for more information.
