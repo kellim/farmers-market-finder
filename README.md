@@ -1,21 +1,19 @@
 # Farmers Market Finder
-This is the _Neighborhood Map_ project for Udacity's Front-End Web Developer Nanodegree. 
 
-This project uses the Google Maps API and USDA National Farmers Market Directory API to create a mashup where visitors can search for Farmers Markets by entering a zip code, then Farmers Markets near that zip code will be shown on the map. You can click on a marker or an item in the result list to view more info about the market such as address, schedule, and products. Technologies used include JavaScript, Knockout, jQuery, HTML, CSS, and Bootstrap.
+This project uses the Google Maps API and USDA National Farmers Market Directory API to create a mashup where visitors can search for Farmers Markets in the US by entering a zip code, then Farmers Markets near that zip code will be shown on the map. You can click on a marker or an item in the result list to view more info about the market such as address, schedule, and products. Technologies used include JavaScript, Knockout, jQuery, HTML, CSS, and Bootstrap.
 
-## View Project Demo Online
-View the demo online at https://kellim.github.io/farmers-markets
+## Demo
+View the demo at https://kellim.github.io/farmers-markets
 
 ## Run Project Locally
-Note: I built this project on a Windows 7 PC. Instructions could vary slightly on a different OS.
 
 To run the project locally:
-* Download [this repository](https://github.com/kellim/farmers-market-finder) to your machine or Fork the repository. To simply download the files, you can click the `Download Zip` button on the GitHub page for the repository, and then it will download all the files to your computer. You'll need to unzip the files before working with them.
+* Download [this repository](https://github.com/kellim/farmers-market-finder) to your machine or fork the repository.
 * Update `YOUR_KEY_GOES_HERE` in the following line in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
 `<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`
 * Install [Node.js](https://nodejs.org) on your computer if you don't already have it installed.
 * Install [Grunt](http://gruntjs.com) on your computer. See the [Getting Started](http://gruntjs.com/getting-started) guide for more information.
-* Install the following Grunt Plugins from the Node.js command prompt while you are in the root directory for this project:
+* Install the following Grunt Plugins for this project:
   * [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
   * [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
   * [copy](https://github.com/gruntjs/grunt-contrib-copy)
