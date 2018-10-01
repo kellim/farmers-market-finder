@@ -41,6 +41,6 @@ This project was created as an assignment for the Udacity Front-End Nanodegree, 
 
 The code in this project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-Note that you will be responsible for following terms of service of the third party APIs used in this app. 
+Note that you will be responsible for following terms of service of the third party APIs used in the code. 
 
 
