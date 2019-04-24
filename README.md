@@ -34,8 +34,8 @@ To run the project locally:
 
 
 ## APIs Used
-* [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html)
-* [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial)
+* [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html) - No API Key needed
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - You'll need your own [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key) Note: If you're using your Google Maps API key online in a client-side app, you can go to the "Application Restrictions" settings and restrict the websites that your key will work on.  
 
 ## License
 
