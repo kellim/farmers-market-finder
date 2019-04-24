@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-  var mozjpeg = require('imagemin-mozjpeg');
   grunt.initConfig({
     cssmin: {
       target: {

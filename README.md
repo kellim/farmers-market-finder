@@ -10,32 +10,32 @@ Use the app online at https://kellim.github.io/farmers-markets
 
 ## Run Project Locally
 
+Assumes local installation of [Node.js](https://nodejs.org)
+
 To run the project locally:
-* Clone this repository.
+
+* Clone or fork this repository.
 * Update `YOUR_KEY_GOES_HERE` in the following line in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
 `<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`
-* Install [Node.js](https://nodejs.org) on your computer if you don't already have it installed.
-* Install [Grunt](http://gruntjs.com) on your computer. See the [Getting Started](http://gruntjs.com/getting-started) guide for more information.
-* Install the following Grunt Plugins for this project:
-  * [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
-  * [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
-  * [copy](https://github.com/gruntjs/grunt-contrib-copy)
-* The source files to edit are located in the `src` directory. When you make changes to those files that you want to be in your production code, go to the Node.js command prompt and type `grunt`, which will run all of the plugins for this project. All of the files in the `src` directory will be processed and output to the `dist` directory.
-* Finally, open `index.html` in the `dist` directory in a web browser.
+* Run `npm install`
+* Run `npm run build` (Run this after changes are made to code in the `src` directory and the production code will be output to the `dist` directory.)
+* Open `index.html` in the `dist` directory in a web browser.
 
 ## Technologies Used
 * JavaScript
 * [jQuery](https://jquery.com)
 * [Bootstrap](http://getbootstrap.com)
 * [Knockout](https://knockoutjs.com)
+* [Grunt](http://gruntjs.com)
+  * Plugins:
+    * [cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
+    * [uglify](https://github.com/gruntjs/grunt-contrib-uglify)
+    * [copy](https://github.com/gruntjs/grunt-contrib-copy)
+
 
 ## APIs Used
 * [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html)
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial)
-
-## Contributions
-
-This project was created as an assignment for the Udacity Front-End Nanodegree, so I will not be accepting any contributions. 
 
 ## License
 
