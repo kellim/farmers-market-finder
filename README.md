@@ -4,7 +4,7 @@ This project uses the Google Maps API and USDA National Farmers Market Directory
 
 ## Demo
 
-Use the app online at https://kellim.github.io/farmers-markets  
+Use the app online at https://farmers-market-finder.netlify.com/
 
 ![Farmers Market Finder - Animated gif demo](demo/demo.gif)
 
@@ -18,7 +18,7 @@ To run the project locally:
 * Update `YOUR_KEY_GOES_HERE` in the following line in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
 `<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`
 * Run `npm install`
-* Run `npm run build` (Also run this after changes are made to code in the `src` directory and the production code will be output to the `dist` directory.)
+* Run `npm run build` (Also run this after changes are made to code in the `src` directory - the production code will then be output to a `dist` directory.)
 * Open `index.html` in the `dist` directory in a web browser.
 
 ## Technologies Used
