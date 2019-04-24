@@ -183,7 +183,7 @@ var AppViewModel = function() {
     if (self.zipDataValid()) {
       self.numResults = 0;
       var loadData = $.ajax({
-        url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + self.zip(),
+        url: "https://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + self.zip(),
         dataType: 'jsonp',
         timeout: 8000
       });
@@ -214,7 +214,7 @@ var AppViewModel = function() {
   // createMarketItem() to put a new Market object in an array for each result.
   this.loadMarketDetails = function(marketId, marketName) {
     var loadDetails = $.ajax({
-      url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" +
+      url: "https://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" +
       marketId,
       dataType: 'jsonp',
       timeout: 8000
