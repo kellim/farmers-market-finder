@@ -4,7 +4,7 @@ This project uses the Google Maps API and USDA National Farmers Market Directory
 
 ## Demo
 
-Use the app online at https://farmers-market-finder.netlify.com/
+Use the app online at https://farmersmarkets.kelli.app/
 
 ![Farmers Market Finder - Animated gif demo](demo/demo.gif)
 
