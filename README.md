@@ -37,7 +37,7 @@ To run the project locally:
 * [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html) - No API Key needed
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - a [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key) is required. 
 
-Note: If you put the project online, you should restrict the websites that the key will work on since this is a Front-End only app and the key will be visible in the source code. To do this, go to your project in the [Google Cloud Console](https://console.cloud.google.com) and under APIs & Services > Credentials > Choose API Key: look under Application restrictions > Website restrictions where you can add websites that the key will work on.
+Note: If you put the project online, you should restrict the websites that the Google Maps JavaScript API key will work on since this is a Front-End only app and the key will be visible in the source code. To do this, go to your project in the [Google Cloud Console](https://console.cloud.google.com) and under APIs & Services > Credentials > Choose API Key: look under Application restrictions > Website restrictions where you can add websites that the key will work on.
 
 ## License
 
