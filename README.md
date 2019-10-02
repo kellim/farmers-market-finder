@@ -17,7 +17,7 @@ To run the project locally:
 * Clone or fork this repository.
 * Update `YOUR_KEY_GOES_HERE` on the following line (right above the closing body tag) in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
 `<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`  
-__Note: Google now requires a billing account to be setup for using Google Maps. See [Get Started with Google Maps Platform](https://developers.google.com/maps/gmp-get-started) for more information.__
+__Note: Google now requires a billing account to be setup for using the Google Maps API. See [Get Started with Google Maps Platform](https://developers.google.com/maps/gmp-get-started) for more information.__
 * Run `npm install`
 * Run `npm run build` (Also run this after changes are made to code in the `src` directory - the production code will then be output to a `dist` directory.)
 * Open `index.html` in the `dist` directory in a web browser.
