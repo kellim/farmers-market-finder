@@ -36,7 +36,8 @@ __Note: Google now requires a billing account to be setup for using the Google M
 
 ## APIs Used
 * [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html) - No API Key needed, but see [API Terms of Service](https://search.ams.usda.gov/farmersmarkets/v1/APITOS.html) which has text for the required attribution.
-* [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - a [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key) is required. 
+* [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - a [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key) is required.  
+__Note: Google now requires a billing account to be setup for using the Google Maps API. See [Get Started with Google Maps Platform](https://developers.google.com/maps/gmp-get-started) for more information.__
 
 Note: If you put the project online, you should restrict the websites that the Google Maps JavaScript API key will work on since this is a Front-End only app and the key will be visible in the source code. To do this, go to your project in the [Google Cloud Console](https://console.cloud.google.com) and under APIs & Services > Credentials > Choose API Key: look under Application restrictions > Website restrictions where you can add websites that the key will work on.
 
