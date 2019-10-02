@@ -16,7 +16,8 @@ To run the project locally:
 
 * Clone or fork this repository.
 * Update `YOUR_KEY_GOES_HERE` on the following line (right above the closing body tag) in `src\index.html` with your [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key):<br>
-`<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`
+`<script async defer src="http://maps.googleapis.com/maps/api/js?v=3?key=YOUR_KEY_GOES_HERE&callback=init" onerror="mapLoadError()"></script>`  
+__Note: Google now requires a billing account to be setup for using Google Maps. See [Get Started with Google Maps Platform](https://developers.google.com/maps/gmp-get-started) for more information.__
 * Run `npm install`
 * Run `npm run build` (Also run this after changes are made to code in the `src` directory - the production code will then be output to a `dist` directory.)
 * Open `index.html` in the `dist` directory in a web browser.
@@ -34,7 +35,7 @@ To run the project locally:
 
 
 ## APIs Used
-* [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html) - No API Key needed
+* [USDA National Farmers Market Directory API](https://search.ams.usda.gov/farmersmarkets/v1/svcdesc.html) - No API Key needed, but see [API Terms of Service](https://search.ams.usda.gov/farmersmarkets/v1/APITOS.html) which has text for the required attribution.
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - a [Google Maps JavaScript API key](https://developers.google.com/maps/documentation/javascript/get-api-key) is required. 
 
 Note: If you put the project online, you should restrict the websites that the Google Maps JavaScript API key will work on since this is a Front-End only app and the key will be visible in the source code. To do this, go to your project in the [Google Cloud Console](https://console.cloud.google.com) and under APIs & Services > Credentials > Choose API Key: look under Application restrictions > Website restrictions where you can add websites that the key will work on.
